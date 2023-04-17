@@ -3,14 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeadComponent } from './head/head.component';
+import { SuiModule } from 'ng2-semantic-ui';
+import { IndexComponent } from './body/index/index.component';
+import { LoginComponent } from './body/login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeadComponent,
+    IndexComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SuiModule // Add Semantic UI module
   ],
   providers: [],
   bootstrap: [AppComponent]

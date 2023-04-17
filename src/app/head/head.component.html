@@ -1,0 +1,17 @@
+<div class="ui inverted vertical masthead center aligned segment">
+  <div class="ui container">
+    <div class="ui secondary inverted pointing large menu">
+      <a class="active item" [routerLink]="[ '/home' ]">主页</a>
+      <a class="item" href="/tool/">工具</a>
+      <a class="item" href="/market/">帖子</a>
+      <a class="item" href="/blog/">博客</a>
+      <a class="item" href="/blog/">关于</a>
+      <div class="right menu" *ngIf="!isLogin">
+        <button class="ui blue button" [routerLink]="[ '/login' ]">
+          <i class="user icon"></i>
+          登录/注册
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
