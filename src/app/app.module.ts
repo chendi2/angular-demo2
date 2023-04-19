@@ -7,13 +7,15 @@ import { HeadComponent } from './head/head.component';
 import { SuiModule } from 'ng2-semantic-ui';
 import { IndexComponent } from './body/index/index.component';
 import { LoginComponent } from './body/login/login.component';
+import { LogonComponent } from './body/logon/logon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeadComponent,
     IndexComponent,
-    LoginComponent
+    LoginComponent,
+    LogonComponent
   ],
   imports: [
     BrowserModule,

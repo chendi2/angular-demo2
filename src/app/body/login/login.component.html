@@ -1,4 +1,4 @@
-<div class="ui middle aligned center aligned grid" style="height: 100%;margin-top: 20px">
+<div class="ui middle aligned center aligned grid" style="height: 100%;margin-top: 50px">
     <div class="column" style="max-width: 450px;">
       <h2 class="ui teal image header">
         <img src="https://cdn.hbutcloud.top/about.jpg" class="image" alt="">
@@ -20,18 +20,6 @@
               <input type="password" name="password" placeholder="密码">
             </div>
           </div>
-          <div class="fields">
-            <div class="field">
-              <div class="ui left icon input">
-                <i class="lock icon"></i>
-                <input type="text" name="verCode" placeholder="验证码">
-              </div>
-
-            </div>
-            <div class="field">
-              <img src="/user/captcha" alt=""/>
-            </div>
-          </div>
           <div class="ui fluid large teal submit button">登录</div>
         </div>
 
@@ -40,7 +28,7 @@
       </form>
       <div class="ui message">
         遇到问题？点击<a href="#">重置密码</a>或
-        <a href="/user/addUser">注册</a>
+        <a [routerLink]="[ '/logon' ]">立即注册</a>
       </div>
       <div class="ui error message" ></div>
     </div>
