@@ -6,43 +6,58 @@
         注册新账户
       </div>
     </h2>
-    <form class="ui large form" method="post" action="#">
+    <form [formGroup]="logonForm" (submit)="onSubmit()" class="ui large form">
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
             <i class="envelope icon"></i>
-            <input id="mail" type="text" name="email" placeholder="Email">
+            <input type="text "placeholder="Email" formControlName="email">
           </div>
         </div>
 
         <div class="field">
           <div class="ui left icon input" >
             <i class="info icon"></i>
-            <input type="text" name="nickname" placeholder="昵称">
+            <input type="text" placeholder="昵称" formControlName="nickname">
           </div>
         </div>
 
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="密码">
+            <input type="password" placeholder="密码" formControlName="password">
           </div>
         </div>
 
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon"></i>
-            <input type="password" name="repassWord" placeholder="再次输入密码">
+            <input type="password" placeholder="再次输入密码" formControlName="re_password">
           </div>
         </div>
 
         <div class="requested field">
           <div class="ui left icon input">
             <i class="keyboard icon"></i>
-            <input type="text" name="inviter" placeholder="邀请人邮箱（选填）">
+            <input type="text" placeholder="邀请人邮箱（选填）" formControlName="inviter">
           </div>
         </div>
-        <div class="ui fluid large teal submit button">注册</div>
+
+        <div class="fields">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="code icon"></i>
+              <input type="text" formControlName="ver_code" placeholder="验证码">
+            </div>
+          </div>
+          <div class="field">
+            <!--              <img src="/api/user/captcha"/>-->
+            <img [src]="imgSrc" (click)="getImgSrc()"/>
+          </div>
+        </div>
+
+
+        <button class="ui fluid large teal submit button">注册</button>
       </div>
 
       <div class="ui error message"></div>

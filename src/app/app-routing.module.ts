@@ -5,10 +5,10 @@ import {LoginComponent} from "./body/login/login.component";
 import {LogonComponent} from "./body/logon/logon.component";
 
 const routes: Routes = [
-  { path: 'home', component: IndexComponent },
+  { path: 'home', component: IndexComponent ,data: { breadcrumb: '主页' }},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'logon', component: LogonComponent }
+  { path: 'login', component: LoginComponent, data: { breadcrumb: '登陆' } },
+  { path: 'logon', component: LogonComponent, data: { breadcrumb: '注册' } }
 ];
 
 @NgModule({
