@@ -3,10 +3,13 @@
   <li nz-menu-item nzMatchRouter>
     <a [routerLink]="['/home']">主页</a>
   </li>
-  <li nz-menu-item nzMatchRouter>
-    <a [routerLink]="['/else']">工具</a>
+  <li nz-menu-item nzMatchRouter >
+    <a [routerLink]="['/about']">关于</a>
   </li>
-  <li nz-menu-item nzMatchRouter class="login_menu">
+  <li nz-menu-item nzMatchRouter class="login_menu" *ngIf="!isLogin">
     <a [routerLink]="['/login']">登陆/注册</a>
+  </li>
+  <li nz-menu-item nzMatchRouter class="login_menu"   *ngIf="isLogin">
+    <a (click)="logout_test()"><a nz-icon nzType='user'></a>个人</a>
   </li>
 </ul>

@@ -9,3 +9,6 @@ nz-breadcrumb {
 nz-content {
   padding: 16px 50px;
 }
+nz-footer {
+  text-align: center;
+}

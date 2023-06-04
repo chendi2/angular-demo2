@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { formatDate } from "@angular/common";
 import {AuthService} from "../../services/auth.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {NzMessageService} from "ng-zorro-antd/message";
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-login',
@@ -10,18 +12,16 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  imgSrc:any
-  ver_key:any
-  ver_code:string = ""
   isError:boolean = false
+  isLoading:boolean = false
   errorMessage:string = ""
 
   constructor(
     private http: HttpClient,
-    private authService:AuthService
-  ) {
-    this.getImgSrc()
-  }
+    private authService:AuthService,
+    private messageService: NzMessageService,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
   }
@@ -35,11 +35,9 @@ export class LoginComponent implements OnInit {
       Validators.required,
       Validators.minLength(6)
     ]),
-    ver_code: new FormControl("",[
-      Validators.required,
-      Validators.minLength(5)
-    ])
+    remember: new FormControl(false)
   })
+
 
   transformRequest(data:any) {
     let str = '';
@@ -50,33 +48,36 @@ export class LoginComponent implements OnInit {
     return str;
   };
 
-  getImgSrc(){
-    this.ver_key = this.getRandomString();
-    this.imgSrc =  '/api/user/captcha/' + this.ver_key
-  }
-
-  getRandomString() {
-    return formatDate(Date.now(), 'mmssSSS','en-US') + Number((Math.random() * 100).toFixed(0))
-  }
-
   onSubmit() {
-    let url = '/api/user/login';
-    let data = this.loginForm.value
-    let added_data = {"ver_key":this.ver_key}
-    let params = Object.assign({}, data, added_data);
-    const httpOptions = {
-      headers: new HttpHeaders({'content-type': 'application/x-www-form-urlencoded'})
-    };
-    this.http.post(url,this.transformRequest(params),httpOptions).subscribe((res:any)=>{
-      console.log(res);
-      if (res.code == 200){
-        this.isError = false
-        this.authService.login(res.data)
-      }else if (res.code == 400){
-        this.getImgSrc()
-        this.isError = true
-        this.errorMessage = res.message
-      }
-    })
+    if (this.loginForm.valid) {
+      this.isLoading = true
+      let url = '/api/user/login';
+      let params = this.loginForm.value
+      console.log(params);
+      const httpOptions = {
+        headers: new HttpHeaders({'content-type': 'application/x-www-form-urlencoded'})
+      };
+      this.http.post(url,this.transformRequest(params),httpOptions).subscribe((res:any)=>{
+        this.isLoading = false
+        console.log(res);
+        if (res.code == 200){
+          this.authService.login(res.data)
+          this.messageService.create('success', `登陆成功！`)
+          this.location.back();
+        }else if (res.code == 400){
+          this.isError = true
+          this.errorMessage = res.message
+        }
+      })
+    }else {
+      Object.values(this.loginForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
+    this.isError = false
   }
+
 }

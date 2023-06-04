@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
+  array = [1, 2, 3, 4];
 
   constructor() { }
 

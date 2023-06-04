@@ -22,6 +22,14 @@ import {NzFormModule} from "ng-zorro-antd/form";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import {NzInputModule} from "ng-zorro-antd/input";
+import { NzImageModule } from 'ng-zorro-antd/image';
+import {NzAlertModule} from "ng-zorro-antd/alert";
+import {NzTimelineModule} from "ng-zorro-antd/timeline";
+import { AboutComponent } from './body/about/about.component';
+import {NzTypographyModule} from "ng-zorro-antd/typography";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {NzIconModule} from "ng-zorro-antd/icon";
+
 
 registerLocaleData(zh);
 
@@ -31,7 +39,8 @@ registerLocaleData(zh);
     HeadComponent,
     IndexComponent,
     LoginComponent,
-    LogonComponent
+    LogonComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -46,11 +55,17 @@ registerLocaleData(zh);
     NzFormModule,
     NzButtonModule,
     NzCheckboxModule,
-    NzInputModule
+    NzInputModule,
+    NzImageModule,
+    NzAlertModule,
+    NzTimelineModule,
+    NzTypographyModule,
+    NzIconModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: NZ_I18N, useValue: zh_CN }
+    { provide: NZ_I18N, useValue: zh_CN },
+    {provide: NzMessageService}
   ],
   bootstrap: [AppComponent]
 })
