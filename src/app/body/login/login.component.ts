@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd/message";
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private authService:AuthService,
     private messageService: NzMessageService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -63,7 +65,7 @@ export class LoginComponent implements OnInit {
         if (res.code == 200){
           this.authService.login(res.data)
           this.messageService.create('success', `登陆成功！`)
-          this.location.back();
+          this.router.navigate(['home']);
         }else if (res.code == 400){
           this.isError = true
           this.errorMessage = res.message
@@ -79,5 +81,4 @@ export class LoginComponent implements OnInit {
     }
     this.isError = false
   }
-
 }

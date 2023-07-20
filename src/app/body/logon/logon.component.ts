@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {AuthService} from "../../services/auth.service";
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {formatDate} from "@angular/common";
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-
+import {NzMessageService} from "ng-zorro-antd/message";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-logon',
@@ -16,14 +16,20 @@ export class LogonComponent implements OnInit {
     type: 'info-circle',
     theme: 'twotone'
   };
+  email:string = ""
+  inviter:string = ""
   imgSrc:any
   ver_key:string = ""
   isError:boolean = false
   errorMessage:string = ""
+  isVisible = false;  //对话框显示属性
+  isOkLoading = false;  //对话框按钮加载属性
+  inputValue: string | null = null;
 
   constructor(
+    private router: Router,
     private http: HttpClient,
-    private authService:AuthService,
+    private messageService: NzMessageService,
   ) {
     this.getImgSrc()
   }
@@ -63,6 +69,7 @@ export class LogonComponent implements OnInit {
 
     ]),
   })
+
 
   updateConfirmValidator(): void {
     /** wait for refresh value */
@@ -109,10 +116,12 @@ export class LogonComponent implements OnInit {
         headers: new HttpHeaders({'content-type': 'application/x-www-form-urlencoded'})
       };
       this.http.post(url,this.transformRequest(params),httpOptions).subscribe((res:any)=>{
-        console.log(res);
         if (res.code == 200){
           this.isError = false
-          this.authService.login(res.data)
+          this.email = data.email
+          this.inviter = data.inviter
+          //确认注册响应式表单
+          this.showModal()
         }else if (res.code == 400){
           this.getImgSrc()
           this.isError = true
@@ -127,6 +136,44 @@ export class LogonComponent implements OnInit {
         }
       });
     }
+  }
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    this.isOkLoading = true;
+    //进行注册验证
+    let url = '/api/user/checkEmail';
+    let params = {
+      "email": this.email,
+      "token": this.inputValue,
+      "inviter": this.inviter
+    };
+    const httpOptions = {
+      headers: new HttpHeaders({'content-type': 'application/x-www-form-urlencoded'})
+    };
+    this.http.post(url,this.transformRequest(params),httpOptions).subscribe((res:any)=> {
+      this.isOkLoading = false;
+      if (res.code == 200) {
+        //跳转到登录界面
+        this.isVisible = false;
+        this.messageService.create('success', `注册成功！`)
+        this.router.navigate(['login']);
+      } else if (res.code == 400) {
+        this.isVisible = false;
+        this.getImgSrc()
+        this.isError = true
+        this.errorMessage = res.message
+      }
+    })
+  }
+
+
+
+  handleCancel(): void {
+    this.isVisible = false;
   }
 
 }

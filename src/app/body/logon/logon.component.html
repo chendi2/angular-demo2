@@ -101,3 +101,26 @@
   nzDescription="注册出现了问题：{{ errorMessage }}"
   nzShowIcon
 ></nz-alert>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="确认邮箱"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzOkLoading]="isOkLoading"
+>
+  <ng-container *nzModalContent>
+    <nz-input-group [nzSuffix]="inputClearTpl">
+      <input type="text" nz-input [(ngModel)]="inputValue" placeholder="输入验证邮件中的验证码" />
+    </nz-input-group>
+    <ng-template #inputClearTpl>
+      <span
+        nz-icon
+        class="ant-input-clear-icon"
+        nzTheme="fill"
+        nzType="close-circle"
+        *ngIf="inputValue"
+        (click)="inputValue = null"
+      ></span>
+    </ng-template>
+  </ng-container>
+</nz-modal>

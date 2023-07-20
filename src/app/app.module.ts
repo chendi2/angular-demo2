@@ -29,6 +29,7 @@ import { AboutComponent } from './body/about/about.component';
 import {NzTypographyModule} from "ng-zorro-antd/typography";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzIconModule} from "ng-zorro-antd/icon";
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 
 registerLocaleData(zh);
@@ -60,7 +61,8 @@ registerLocaleData(zh);
     NzAlertModule,
     NzTimelineModule,
     NzTypographyModule,
-    NzIconModule
+    NzIconModule,
+    NzModalModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,6 +1,9 @@
-<div class="logo"></div>
+<div class="logo">
+
+</div>
 <ul nz-menu nzTheme="dark" nzMode="horizontal">
   <li nz-menu-item nzMatchRouter>
+    <span nz-icon nzType="home"></span>
     <a [routerLink]="['/home']">主页</a>
   </li>
   <li nz-menu-item nzMatchRouter >
@@ -9,7 +12,9 @@
   <li nz-menu-item nzMatchRouter class="login_menu" *ngIf="!isLogin">
     <a [routerLink]="['/login']">登陆/注册</a>
   </li>
+
   <li nz-menu-item nzMatchRouter class="login_menu"   *ngIf="isLogin">
-    <a (click)="logout_test()"><a nz-icon nzType='user'></a>个人</a>
+    <span nz-icon nzType="user"></span>
+    <a (click)="logout_test()">个人中心</a>
   </li>
 </ul>
