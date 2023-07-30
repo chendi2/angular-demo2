@@ -1,0 +1,30 @@
+<div nz-row nzJustify="center">
+  <nz-card class="reset-card">
+    <p>输入注册邮箱，你会收到一封验证邮件，在验证你的邮箱后，你的账户密码将会被重置为
+      <strong>
+        hbutcloud
+      </strong>
+      。</p>
+    <p>重置密码后即可使用该密码登录，不要忘记稍后在个人中心修改你的密码。</p>
+    <form nz-form nzLayout="inline" [formGroup]="resetForm" (submit)="onSubmit()" >
+      <nz-form-item>
+        <nz-form-label>注册邮箱</nz-form-label>
+        <nz-form-control nzErrorTip="请输入正确的邮箱!">
+          <input type="text" nz-input placeholder="邮箱" formControlName="username" >
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <button nz-button [nzType]="'primary'" [nzLoading]="isLoading">重置</button>
+      </nz-form-item>
+
+    </form>
+  </nz-card>
+</div>
+<nz-alert
+  *ngIf="isError"
+  nzType="error"
+  nzMessage="错误"
+  nzDescription="重置出现了问题：{{ errorMessage }}"
+  nzShowIcon
+></nz-alert>

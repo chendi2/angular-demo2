@@ -22,13 +22,13 @@
           </label>
         </div>
         <div nz-col [nzSpan]="12">
-          <a class="login-form-forgot">重制密码</a>
+          <a [routerLink]="['/user/reset']" class="login-form-forgot">重制密码</a>
         </div>
       </div>
 
       <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" [nzLoading]="isLoading">登陆</button>
       你也可以
-      <a [routerLink]="['/logon']">现在注册!</a>
+      <a [routerLink]="['/user/logon']">现在注册!</a>
     </form>
 </div>
 <nz-alert

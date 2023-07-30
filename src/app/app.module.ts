@@ -7,8 +7,8 @@ import { HeadComponent } from './head/head.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { IndexComponent } from './body/index/index.component';
-import { LoginComponent } from './body/login/login.component';
-import { LogonComponent } from './body/logon/logon.component';
+import { LoginComponent } from './body/user/login/login.component';
+import { LogonComponent } from './body/user/logon/logon.component';
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
@@ -30,7 +30,10 @@ import {NzTypographyModule} from "ng-zorro-antd/typography";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import { NzModalModule } from 'ng-zorro-antd/modal';
-
+import { UserComponent } from './body/user/user.component';
+import { ResetComponent } from './body/user/reset/reset.component';
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 registerLocaleData(zh);
 
@@ -41,7 +44,9 @@ registerLocaleData(zh);
     IndexComponent,
     LoginComponent,
     LogonComponent,
-    AboutComponent
+    AboutComponent,
+    UserComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +67,9 @@ registerLocaleData(zh);
     NzTimelineModule,
     NzTypographyModule,
     NzIconModule,
-    NzModalModule
+    NzModalModule,
+    NzDatePickerModule,
+    NzCardModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

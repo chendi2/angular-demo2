@@ -17,14 +17,18 @@ export class AuthService {
     }
   }
 
-  login(token:string) {
+  login(token:string, isRemember:boolean) {
     this.loggedIn = true;
-    this.storageService.setLocalStorage('token', token);
-    //this.router.navigateByUrl("");
+    if (isRemember){
+      this.storageService.setLocalStorage('token', token);
+    }else{
+      this.storageService.setSessionStorage('token', token);
+    }
   }
 
   logout() {
     localStorage.removeItem('token')
+    sessionStorage.removeItem('token')
     this.loggedIn = false;
   }
 

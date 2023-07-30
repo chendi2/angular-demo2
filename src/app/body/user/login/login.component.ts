@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../../services/auth.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd/message";
@@ -63,7 +63,8 @@ export class LoginComponent implements OnInit {
         this.isLoading = false
         console.log(res);
         if (res.code == 200){
-          this.authService.login(res.data)
+          const isRemember = params.remember
+          this.authService.login(res.data, isRemember)
           this.messageService.create('success', `登陆成功！`)
           this.router.navigate(['home']);
         }else if (res.code == 400){
