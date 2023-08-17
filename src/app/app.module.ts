@@ -34,6 +34,11 @@ import { UserComponent } from './body/user/user.component';
 import { ResetComponent } from './body/user/reset/reset.component';
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { HomeComponent } from './body/user/home/home.component';
+import {UpdateTokenInterceptor} from "./interceptors/update-token.interceptor";
+import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
+import {NzBadgeModule} from "ng-zorro-antd/badge";
+import {NzAvatarModule} from "ng-zorro-antd/avatar";
 
 registerLocaleData(zh);
 
@@ -46,7 +51,8 @@ registerLocaleData(zh);
     LogonComponent,
     AboutComponent,
     UserComponent,
-    ResetComponent
+    ResetComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -69,10 +75,14 @@ registerLocaleData(zh);
     NzIconModule,
     NzModalModule,
     NzDatePickerModule,
-    NzCardModule
+    NzCardModule,
+    NzDescriptionsModule,
+    NzBadgeModule,
+    NzAvatarModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true ,},
+    { provide: HTTP_INTERCEPTORS, useClass: UpdateTokenInterceptor, multi: true },
     { provide: NZ_I18N, useValue: zh_CN },
     {provide: NzMessageService}
   ],

@@ -1,0 +1,34 @@
+<nz-card [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+  <nz-card-meta
+    nzTitle={{user.nickname}}
+    nzDescription="这是一段个性签名"
+    [nzAvatar]="avatarTemplate"
+  ></nz-card-meta>
+</nz-card>
+<ng-template #avatarTemplate>
+  <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+</ng-template>
+
+<ng-template #actionSetting>
+  <span nz-icon nzType="setting"></span>
+</ng-template>
+<ng-template #actionEdit>
+  <span nz-icon nzType="edit"></span>
+</ng-template>
+<ng-template #actionEllipsis>
+  <span nz-icon nzType="ellipsis"></span>
+</ng-template>
+<nz-descriptions nzTitle="用户信息" nzLayout="vertical" nzBordered>
+  <nz-descriptions-item nzTitle="ID">{{user.uid}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="昵称">{{user.nickname}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="是否添加学生信息">{{user.isStudent==1?'是':'否'}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="注册邮箱" [nzSpan]="3">
+    {{user.email}}
+  </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="状态" [nzSpan]="2">
+    <nz-badge *ngIf="user.flag==1" nzStatus="processing" nzText="注册用户"></nz-badge>
+    <nz-badge *ngIf="user.flag!=1" nzStatus="error" nzText="异常用户"></nz-badge>
+  </nz-descriptions-item>
+
+  <nz-descriptions-item nzTitle="剩余积分">{{user.balance}}</nz-descriptions-item>
+</nz-descriptions>

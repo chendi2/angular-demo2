@@ -16,7 +16,7 @@ export class LogonComponent implements OnInit {
     type: 'info-circle',
     theme: 'twotone'
   };
-  email:string = ""
+  email:string = "";  //验证邮箱
   inviter:string = ""
   imgSrc:any
   ver_key:string = ""

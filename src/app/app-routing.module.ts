@@ -6,6 +6,7 @@ import {LogonComponent} from "./body/user/logon/logon.component";
 import {AboutComponent} from "./body/about/about.component";
 import {UserComponent} from "./body/user/user.component";
 import {ResetComponent} from "./body/user/reset/reset.component";
+import {HomeComponent} from "./body/user/home/home.component";
 
 const routes: Routes = [
   { path: 'home', component: IndexComponent ,data: { breadcrumb: '主页' }},
@@ -14,7 +15,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent, data: { breadcrumb: '登陆' } },
       { path: 'logon', component: LogonComponent, data: { breadcrumb: '注册' } },
-      { path: 'reset', component: ResetComponent, data: { breadcrumb: '重置密码' } }
+      { path: 'reset', component: ResetComponent, data: { breadcrumb: '重置密码' } },
+      { path: 'home', component: HomeComponent, data: { breadcrumb: '个人中心' } },
     ]},
   { path: 'about', component: AboutComponent, data: { breadcrumb: '关于' } }
 ];
